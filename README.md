@@ -1,2 +1,1 @@
-# diplom
-Diplom
+# diplom_wolk

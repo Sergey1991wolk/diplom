@@ -1,18 +1,40 @@
 from pom.pages.profile_page import ProfilePage
-from pom.pages.login_page import LoginPage
+from pom.tests.test_until import TestUtil
 
-def test_sc_color_profile(driver):
-    login_page = LoginPage(driver)
-    login_page.open()
-    user_name_field = login_page.user_name_field()  #логинимся ввод пороля без remember me,
-    user_name_field.click()
-    user_name_field.send_keys('wf.anna@gmail.com')
-    password_field = login_page.user_password_field()
-    password_field.click()
-    password_field.send_keys('1Vk9rU&i@NtvD3pVf70y5UEu')
-    remember_me = login_page.remember_me_field()
-    remember_me.click()
-    login_page.login_button().submit()
 
-    light_color = ProfilePage(driver)
-    light_color.open()
+def test_sc_color_profile_light(driver):
+    TestUtil.login(driver)
+    profile_page = ProfilePage(driver)
+    profile_page.open()
+    light_color = profile_page.light_color()
+    light_color.click()
+    assert light_color.accessible_name == 'Light'
+
+def test_sc_color_profile_modern(driver):
+    TestUtil.login(driver)
+    profile_page = ProfilePage(driver)
+    profile_page.open()
+    modern = profile_page.modern_color()
+    modern.click()
+    assert modern.accessible_name == 'Modern'
+
+
+ #   def test_sc_color_profile_evergreen
+  #      def test_sc_color_profile_mint
+   #         def test_sc_color_profile_blue
+# def test_sc_color_profile_coffee
+#def test_sc_color_profile_ectoplasm
+#def test_sc_color_profile_mindnight
+#def test_sc_color_profile_ocean
+#def test_sc_color_profile_sunrise
+
+
+def test_nickname(driver):
+    TestUtil.login(driver)
+    profile_page = ProfilePage(driver)
+    profile_page.open()
+    nickname = profile_page.nickname()
+    assert nickname.get_attribute('value') == 'user'
+
+
+

@@ -17,7 +17,12 @@ class ProfilePage:
         by_name, by_val = args[0]
         return self.driver.find_element(by_name, by_val)
 
-
     def light_color(self):
         return self.find_element(loc.light_color)
+
+    def modern_color(self):
+        return self.find_element(loc.modern_color)
+
+    def nickname(self):
+        return self.find_element(loc.nickname)
 

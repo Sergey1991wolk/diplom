@@ -1,4 +1,3 @@
-import conftest
 from pom.pages.forum_page import ForumPage
 from pom.pages.login_page import LoginPage
 
@@ -23,6 +22,7 @@ def test_sc_find_forum(driver):
         is_forum_exists = False
     assert is_forum_exists == True
 
+
 def test_sc_forum_without_login(driver):
     forum_page = ForumPage(driver)
     forum_page.open()
@@ -33,6 +33,7 @@ def test_sc_forum_without_login(driver):
         print("Forum is not on the page.")
         is_forum_exists = False
     assert is_forum_exists == False
+
 
 def test_sc_forum_without_login_error_message(driver):
     forum_page = ForumPage(driver)

@@ -1,6 +1,6 @@
 import conftest
 from pom.pages.login_page import LoginPage
-
+from selenium.webdriver.support.ui import Select
 
 def test_sc_submit_rem_me_not_set(driver):
     login_page = LoginPage(driver)
@@ -60,9 +60,32 @@ def test_sc_wrong_login(driver):
     assert login_page.wrong_login_message().text == 'Error: the password you entered for the email address ' \
                                                     'wf.anna@gmail.com is incorrect. Lost your password?'
 
+def test_sc_visible_password(driver):
+    login_page = LoginPage(driver)
+    login_page.open()
+    user_name_field = login_page.user_name_field()  #логинимся ввод пороля без remember me,
+    user_name_field.click()
+    user_name_field.send_keys('wf.anna@gmail.com')
+    password_field = login_page.user_password_field()
+    password_field.click()
+    password_field.send_keys('1Vk9rU&i@NtvD3pVf70y5UEu')
+    visible_password = login_page.visible_password()
+    visible_password.click()
+    login_page.login_button().submit()
+    driver.close()
+    driver_new = conftest.init_driver()
+    login_page_new = LoginPage(driver_new)
+    login_page_new.open()
+    assert login_page_new.user_name_field() is not None
 
 
 
-
-
+#def test_sc_check_box_language(driver):
+ #   login_page = LoginPage(driver)
+  #  login_page.open()
+   # lang_checkbox = login_page.lang_checkbox()
+    #lang_checkbox.click()
+    #lang_checkbox.select_by_value('de_DE')
+    #lang_checkbox.click()
+    #assert isinstance(lang_checkbox.select_by_value, object)
 

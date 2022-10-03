@@ -31,3 +31,11 @@ class LoginPage:
 
     def wrong_login_message(self):
         return self.find_element(loc.wrong_login_message)
+
+    def visible_password(self):
+        return self.find_element(loc.visible_password)
+
+
+    #def lang_checkbox(self):
+     #   return self.find_element(loc.lang_checkbox)
+

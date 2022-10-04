@@ -35,7 +35,6 @@ class LoginPage:
     def visible_password(self):
         return self.find_element(loc.visible_password)
 
-
-    #def lang_checkbox(self):
-     #   return self.find_element(loc.lang_checkbox)
+    def lang_combobox(self):
+        return self.find_element(loc.lang_combobox)
 

@@ -73,3 +73,6 @@ class ProfilePage:
 
     def update_profile(self):
         return self.find_element(loc.update_profile)
+
+    def lang_combobox(self):
+        return self.find_element(loc.lang_combobox)

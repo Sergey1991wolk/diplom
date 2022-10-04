@@ -2,6 +2,7 @@ from selenium.webdriver import Keys
 from pom.pages.forum_page import ForumPage
 from pom.pages.login_page import LoginPage
 from pom.tests.test_until import TestUtil
+from time import sleep
 
 def test_sc_find_forum(driver):
     login_page = LoginPage(driver)
@@ -43,9 +44,23 @@ def test_sc_forum_without_login_error_message(driver):
 
 def test_find_forum(driver):
     TestUtil.login(driver)
-    profile_page = ForumPage(driver)
-    profile_page.open()
-    find_forum = ForumPage.find_forum()
+    forum_page = ForumPage(driver)
+    forum_page.open()
+    find_forum = forum_page.find_forum()
     find_forum.click()
-    #find_forum.send_keys('money')
-    #find_forum.send_keys(Keys.ENTER)
+    find_forum.send_keys('money')
+    find_forum.send_keys(Keys.ENTER)
+    find_results = forum_page.find_results()
+    assert find_results.text == 'SEARCH RESULTS FOR: MONEY'
+
+def test_nothing_find_forum(driver):
+    TestUtil.login(driver)
+    forum_page = ForumPage(driver)
+    forum_page.open()
+    find_forum = forum_page.find_forum()
+    find_forum.click()
+    find_forum.send_keys('Go to first line in file')
+    find_forum.send_keys(Keys.ENTER)
+    find_nothing_results = forum_page.find_nothing_results()
+    assert find_nothing_results.text == 'Nothing Found'
+    sleep(5)

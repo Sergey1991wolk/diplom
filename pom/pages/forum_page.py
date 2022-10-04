@@ -26,5 +26,8 @@ class ForumPage:
     def find_forum(self):
         return self.find_element(loc.find_forum)
 
-    def bar_search(self):
-        return self.find_element(loc.bar_search)
+    def find_results(self):
+        return self.find_element(loc.find_results)
+
+    def find_nothing_results(self):
+        return self.find_element(loc.find_nothing_results)

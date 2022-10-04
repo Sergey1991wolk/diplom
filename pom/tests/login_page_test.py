@@ -1,11 +1,13 @@
+
 import conftest
 from pom.pages.login_page import LoginPage
 from selenium.webdriver.support.ui import Select
 
+
 def test_sc_submit_rem_me_not_set(driver):
     login_page = LoginPage(driver)
     login_page.open()
-    user_name_field = login_page.user_name_field()  #логинимся ввод пороля без remember me,
+    user_name_field = login_page.user_name_field()  # логинимся ввод пороля без remember me,
     user_name_field.click()
     user_name_field.send_keys('wf.anna@gmail.com')
     password_field = login_page.user_password_field()
@@ -18,10 +20,11 @@ def test_sc_submit_rem_me_not_set(driver):
     login_page_new.open()
     assert login_page_new.user_name_field() is not None
 
+
 def test_sc_submit_rem_me_set(driver):
     login_page = LoginPage(driver)
     login_page.open()
-    user_name_field = login_page.user_name_field()  #логинимся ввод пороля без remember me,
+    user_name_field = login_page.user_name_field()  # логинимся ввод пороля без remember me,
     user_name_field.click()
     user_name_field.send_keys('wf.anna@gmail.com')
     password_field = login_page.user_password_field()
@@ -33,7 +36,7 @@ def test_sc_submit_rem_me_set(driver):
     cookies = driver.get_cookies()
     driver.close()
     driver_new = conftest.init_driver()
-    driver_new.get('https://dekarlab.de')        #для куки. передача куки
+    driver_new.get('https://dekarlab.de')  # для куки. передача куки
     for cookie in cookies:
         driver_new.add_cookie(cookie)
     login_page_new = LoginPage(driver_new)
@@ -46,10 +49,11 @@ def test_sc_submit_rem_me_set(driver):
         is_user_name_exists = False
     assert is_user_name_exists == False
 
+
 def test_sc_wrong_login(driver):
     login_page = LoginPage(driver)
     login_page.open()
-    user_name_field = login_page.user_name_field()  #логинимся ввод пороля без remember me,
+    user_name_field = login_page.user_name_field()  # логинимся ввод пороля без remember me,
     user_name_field.click()
     user_name_field.send_keys('wf.anna@gmail.com')
     password_field = login_page.user_password_field()
@@ -60,10 +64,11 @@ def test_sc_wrong_login(driver):
     assert login_page.wrong_login_message().text == 'Error: the password you entered for the email address ' \
                                                     'wf.anna@gmail.com is incorrect. Lost your password?'
 
+
 def test_sc_visible_password(driver):
     login_page = LoginPage(driver)
     login_page.open()
-    user_name_field = login_page.user_name_field()  #логинимся ввод пороля без remember me,
+    user_name_field = login_page.user_name_field()  # логинимся ввод пороля без remember me,
     user_name_field.click()
     user_name_field.send_keys('wf.anna@gmail.com')
     password_field = login_page.user_password_field()
@@ -79,13 +84,29 @@ def test_sc_visible_password(driver):
     assert login_page_new.user_name_field() is not None
 
 
+def test_sc_lang_combobox(driver):
+    login_page = LoginPage(driver)
+    login_page.open()
+    lang_combobox = login_page.lang_combobox()
+    lang_combobox.click()
+    Select(lang_combobox).select_by_value('de_DE')
+    lang_combobox.click()
+    assert Select(lang_combobox).all_selected_options[0].text == 'Deutsch'
 
-#def test_sc_check_box_language(driver):
- #   login_page = LoginPage(driver)
-  #  login_page.open()
-   # lang_checkbox = login_page.lang_checkbox()
-    #lang_checkbox.click()
-    #lang_checkbox.select_by_value('de_DE')
-    #lang_checkbox.click()
-    #assert isinstance(lang_checkbox.select_by_value, object)
+def test_sc_lang_combobox_en_US(driver):
+    login_page = LoginPage(driver)
+    login_page.open()
+    lang_combobox = login_page.lang_combobox()
+    lang_combobox.click()
+    Select(lang_combobox).select_by_value('en_US')
+    lang_combobox.click()
+    assert Select(lang_combobox).all_selected_options[0].text == 'English (United States)'
 
+def test_sc_lang_combobox_en_GB(driver):
+    login_page = LoginPage(driver)
+    login_page.open()
+    lang_combobox = login_page.lang_combobox()
+    lang_combobox.click()
+    Select(lang_combobox).select_by_value('en_GB')
+    lang_combobox.click()
+    assert Select(lang_combobox).all_selected_options[0].text == 'English (UK)'

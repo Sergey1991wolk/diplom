@@ -1,3 +1,4 @@
+from selenium.webdriver.support.select import Select
 from pom.pages.profile_page import ProfilePage
 from pom.tests.test_until import TestUtil
 
@@ -136,3 +137,33 @@ def test_new_application_password_name(driver):
     do_new_password.click()
     update_profile = profile_page.update_profile()
     update_profile.click()
+
+def test_sc_lang_combobox(driver):
+    TestUtil.login(driver)
+    profile_page = ProfilePage(driver)
+    profile_page.open()
+    lang_combobox = profile_page.lang_combobox()
+    lang_combobox.click()
+    Select(lang_combobox).select_by_value('de_DE')
+    lang_combobox.click()
+    assert Select(lang_combobox).all_selected_options[0].text == 'Deutsch'
+
+def test_sc_lang_combobox_en_US(driver):
+    TestUtil.login(driver)
+    profile_page = ProfilePage(driver)
+    profile_page.open()
+    lang_combobox = profile_page.lang_combobox()
+    lang_combobox.click()
+    Select(lang_combobox).select_by_value('')
+    lang_combobox.click()
+    assert Select(lang_combobox).all_selected_options[0].text == 'English (United States)'
+
+def test_sc_lang_combobox_en_GB(driver):
+    TestUtil.login(driver)
+    profile_page = ProfilePage(driver)
+    profile_page.open()
+    lang_combobox = profile_page.lang_combobox()
+    lang_combobox.click()
+    Select(lang_combobox).select_by_value('en_GB')
+    lang_combobox.click()
+    assert Select(lang_combobox).all_selected_options[0].text == 'English (UK)'

@@ -1,6 +1,7 @@
+from selenium.webdriver import Keys
 from pom.pages.forum_page import ForumPage
 from pom.pages.login_page import LoginPage
-
+from pom.tests.test_until import TestUtil
 
 def test_sc_find_forum(driver):
     login_page = LoginPage(driver)
@@ -39,3 +40,12 @@ def test_sc_forum_without_login_error_message(driver):
     forum_page = ForumPage(driver)
     forum_page.open()
     assert forum_page.forum_without_login_error_message().text == 'Oh, bother! No forums were found here.'
+
+def test_find_forum(driver):
+    TestUtil.login(driver)
+    profile_page = ForumPage(driver)
+    profile_page.open()
+    find_forum = ForumPage.find_forum()
+    find_forum.click()
+    #find_forum.send_keys('money')
+    #find_forum.send_keys(Keys.ENTER)

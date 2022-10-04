@@ -22,3 +22,9 @@ class ForumPage:
 
     def forum_without_login_error_message(self):
         return self.find_element(loc.forum_without_login_error_message)
+
+    def find_forum(self):
+        return self.find_element(loc.find_forum)
+
+    def bar_search(self):
+        return self.find_element(loc.bar_search)

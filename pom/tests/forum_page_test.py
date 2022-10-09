@@ -4,10 +4,11 @@ from pom.pages.login_page import LoginPage
 from pom.tests.test_until import TestUtil
 from time import sleep
 
+
 def test_sc_find_forum(driver):
     login_page = LoginPage(driver)
     login_page.open()
-    user_name_field = login_page.user_name_field()  # логинимся ввод пороля без remember me,
+    user_name_field = login_page.user_name_field()
     user_name_field.click()
     user_name_field.send_keys('wf.anna@gmail.com')
     password_field = login_page.user_password_field()
@@ -24,7 +25,6 @@ def test_sc_find_forum(driver):
         is_forum_exists = False
     assert is_forum_exists == True
 
-
 def test_sc_forum_without_login(driver):
     forum_page = ForumPage(driver)
     forum_page.open()
@@ -35,7 +35,6 @@ def test_sc_forum_without_login(driver):
         print("Forum is not on the page.")
         is_forum_exists = False
     assert is_forum_exists == False
-
 
 def test_sc_forum_without_login_error_message(driver):
     forum_page = ForumPage(driver)

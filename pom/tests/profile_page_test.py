@@ -2,7 +2,6 @@ from selenium.webdriver.support.select import Select
 from pom.pages.profile_page import ProfilePage
 from pom.tests.test_until import TestUtil
 
-
 def test_sc_color_profile_light(driver):
     TestUtil.login(driver)
     profile_page = ProfilePage(driver)

@@ -5,7 +5,7 @@ class TestUtil:
     def login(driver):
         login_page = LoginPage(driver)
         login_page.open()
-        user_name_field = login_page.user_name_field()  #логинимся ввод пороля без remember me,
+        user_name_field = login_page.user_name_field()
         user_name_field.click()
         user_name_field.send_keys('wf.anna@gmail.com')
         password_field = login_page.user_password_field()

@@ -2,8 +2,7 @@ from selenium.webdriver import Keys
 from pom.pages.forum_page import ForumPage
 from pom.pages.login_page import LoginPage
 from pom.tests.test_until import TestUtil
-from time import sleep
-
+import conftest
 
 def test_sc_find_forum(driver):
     login_page = LoginPage(driver)
@@ -62,4 +61,3 @@ def test_nothing_find_forum(driver):
     find_forum.send_keys(Keys.ENTER)
     find_nothing_results = forum_page.find_nothing_results()
     assert find_nothing_results.text == 'Nothing Found'
-    sleep(5)
